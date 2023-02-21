@@ -21,6 +21,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/customers")
+@CrossOrigin(origins = "*")
 public class CustomerController extends ClientController   {
 
     @PostMapping("/purchase/{couponId}")

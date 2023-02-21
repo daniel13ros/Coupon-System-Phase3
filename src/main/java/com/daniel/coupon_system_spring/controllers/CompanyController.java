@@ -22,6 +22,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("api/companies")
+@CrossOrigin(origins = "*")
 public class CompanyController extends ClientController {
 
     @Autowired

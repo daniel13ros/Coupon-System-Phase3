@@ -15,8 +15,8 @@ import java.time.LocalDate;
 /**
  * Created by danielR on 15/11/2022
  */
-//@Component
-//@Order(2)
+@Component
+@Order(2)
 public class ServiceTest implements CommandLineRunner {
 
     @Autowired
@@ -28,8 +28,8 @@ public class ServiceTest implements CommandLineRunner {
         BeautifyUtil.startOrEnd("THIS IS SERVICE TEST");
 
         Company company1 = Company.builder()
-                .name("Adidas")
-                .email("adidas@gmail.com")
+                .name("Nike")
+                .email("nike@gmail.com")
                 .password("1234")
                 .type(ClientType.Company)
                 .build();

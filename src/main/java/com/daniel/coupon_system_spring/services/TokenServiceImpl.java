@@ -22,6 +22,20 @@ public class TokenServiceImpl implements TokenService {
 
     private final Map<UUID, Information> map;
 
+    public static void removePreviousInstance(Map<UUID, Information> map, Information info) {
+        UUID keyToRemove = null;
+        for (Map.Entry<UUID, Information> entry : map.entrySet()) {
+            if (entry.getValue().getId()==(info.getId())) {
+                keyToRemove = entry.getKey();
+                break;
+            }
+        }
+        if (keyToRemove != null) {
+            map.remove(keyToRemove);
+        }
+    }
+
+
     @Override
     public UUID addAdmin() {
 
@@ -31,8 +45,10 @@ public class TokenServiceImpl implements TokenService {
                 .time(LocalDateTime.now())
                 .build();
 
-// TODO: 29/12/2022 consider to remove previous insatcnce in the map to this user
+        removePreviousInstance(map,information);
         map.put(token, information);
+        System.out.println(map);
+
         return token;
     }
     @Override
@@ -45,8 +61,10 @@ public class TokenServiceImpl implements TokenService {
                 .time(LocalDateTime.now())
                 .build();
 
-// TODO: 29/12/2022 consider to remove previous insatcnce in the map to this user
+        removePreviousInstance(map,information);
+
         map.put(token, information);
+
         return token;
     }
     @Override
@@ -59,7 +77,8 @@ public class TokenServiceImpl implements TokenService {
                 .time(LocalDateTime.now())
                 .build();
 
-// TODO: 29/12/2022 consider to remove previous insatcnce in the map to this user
+        removePreviousInstance(map,information);
+
         map.put(token, information);
         return token;
     }

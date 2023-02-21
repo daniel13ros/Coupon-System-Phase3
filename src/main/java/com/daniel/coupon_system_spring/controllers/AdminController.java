@@ -20,6 +20,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("api/admin")
+@CrossOrigin(origins = "*")
 public class AdminController extends ClientController {
 
     @PostMapping("companies")
