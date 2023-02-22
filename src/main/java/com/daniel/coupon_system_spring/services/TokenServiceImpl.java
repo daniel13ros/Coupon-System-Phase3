@@ -6,6 +6,7 @@ import com.daniel.coupon_system_spring.beans.Customer;
 import com.daniel.coupon_system_spring.exceptions.SecMsg;
 import com.daniel.coupon_system_spring.exceptions.SecuritySystemException;
 import com.daniel.coupon_system_spring.security.Information;
+import com.daniel.coupon_system_spring.util.TokenInstanceRemover;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +23,6 @@ public class TokenServiceImpl implements TokenService {
 
     private final Map<UUID, Information> map;
 
-    public static void removePreviousInstance(Map<UUID, Information> map, Information info) {
-        UUID keyToRemove = null;
-        for (Map.Entry<UUID, Information> entry : map.entrySet()) {
-            if (entry.getValue().getId()==(info.getId())) {
-                keyToRemove = entry.getKey();
-                break;
-            }
-        }
-        if (keyToRemove != null) {
-            map.remove(keyToRemove);
-        }
-    }
-
 
     @Override
     public UUID addAdmin() {
@@ -45,7 +33,7 @@ public class TokenServiceImpl implements TokenService {
                 .time(LocalDateTime.now())
                 .build();
 
-        removePreviousInstance(map,information);
+        TokenInstanceRemover.removePreviousInstance(map,information);
         map.put(token, information);
         System.out.println(map);
 
@@ -61,7 +49,7 @@ public class TokenServiceImpl implements TokenService {
                 .time(LocalDateTime.now())
                 .build();
 
-        removePreviousInstance(map,information);
+        TokenInstanceRemover.removePreviousInstance(map,information);
 
         map.put(token, information);
 
@@ -77,7 +65,7 @@ public class TokenServiceImpl implements TokenService {
                 .time(LocalDateTime.now())
                 .build();
 
-        removePreviousInstance(map,information);
+        TokenInstanceRemover.removePreviousInstance(map,information);
 
         map.put(token, information);
         return token;
